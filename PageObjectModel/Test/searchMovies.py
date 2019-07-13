@@ -1,14 +1,13 @@
-
 import unittest
 from selenium import webdriver
-
+import time
 
 url = "http://sweetsoundtrack.com/"
 
 
 class SearchMovies(unittest.TestCase):
 
-    def setUp(self, browser="mozilla"):
+    def setUp(self, browser="ff"):
         if browser == "chrome" or browser == "ch":
             self.driver = webdriver.Chrome(executable_path=r'../Drivers/ChromeDrive_75/chromedriver.exe')
             self.driver.maximize_window()
@@ -17,16 +16,20 @@ class SearchMovies(unittest.TestCase):
             self.driver = webdriver.Firefox(executable_path=r'../Drivers/FirefoxDrive_24/geckodriver.exe')
             self.driver.maximize_window()
             self.driver.get(url)
-        # elif browser == "internet" or browser == "ie11":
-        #     self.driver = webdriver.Firefox(executable_path=r'../Drivers/IE_11/IEDriverServer.exe')
+        elif browser == "phantomjs" or browser == "ph":
+            self.driver = webdriver.PhantomJS(executable_path=r'../Drivers/Phantomjs_2_1_1/phantomjs.exe')
+            self.driver.maximize_window()
+            self.driver.get(url)
+        elif browser == "edge " or browser == "ed":
+            self.driver = webdriver.Edge(executable_path=r'../Drivers/Edge_17134/MicrosoftWebDriver.exe')
+            self.driver.maximize_window()
+            self.driver.get(url)
+        # elif browser == "internet" or browser == "ie":
+        #     self.driver = webdriver.Ie(executable_path=r'../Drivers/IE_11/IEDriverServer.exe')
         #     self.driver.maximize_window()
         #     self.driver.get(url)
         # elif browser == "opera" or browser == "op":
-        #     self.driver = webdriver.Firefox(executable_path=r'../Drivers/Opera_60/operadriver.exe')
-        #     self.driver.maximize_window()
-        #     self.driver.get(url)
-        # elif browser == "phantomjs" or browser == "ph":
-        #     self.driver = webdriver.Firefox(executable_path=r'../Drivers/Phantomjs_2_1_1/phantomjs.exe')
+        #     self.driver = webdriver.Opera(executable_path=r'../Drivers/Opera_60/operadriver.exe')
         #     self.driver.maximize_window()
         #     self.driver.get(url)
         else:
@@ -40,5 +43,18 @@ class SearchMovies(unittest.TestCase):
         self.driver.quit()
 
 
-    def songinaMovie(self):
-        self.driver.find_element_by_class_name("searchString").send_keys("Singin' in the Rain")
+    def test_songinaMovie(self):
+        searchSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class ='form-inline']//input[@class ='form-control']")
+        searchSonginaFromMovies.click()
+        searchSonginaFromMovies.send_keys("Singin' in the Rain")
+        linkSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class='form-inline']//*[text()='Search']")
+        linkSonginaFromMovies.click()
+        clickSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']")
+        clickSonginaFromMovies .click()
+
+        # time.sleep(5)
+        # print(self.driver.find_element_by_xpath("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']").text)
+        # assert self.driver.find_element_by_class_name("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']").text == "Singin' in the Rain"
+
+
+
