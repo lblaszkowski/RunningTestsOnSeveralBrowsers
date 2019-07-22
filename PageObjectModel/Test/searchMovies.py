@@ -49,12 +49,11 @@ class SearchMovies(unittest.TestCase):
         searchSonginaFromMovies.send_keys("Singin' in the Rain")
         linkSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class='form-inline']//*[text()='Search']")
         linkSonginaFromMovies.click()
-        clickSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']")
+        clickSonginaFromMovies = self.driver.find_element_by_xpath('//*[@class="list-unstyled"]//*[text()="Singin\' in the Rain"]')
         clickSonginaFromMovies .click()
 
-        # time.sleep(5)
-        # print(self.driver.find_element_by_xpath("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']").text)
-        # assert self.driver.find_element_by_class_name("//*[@class='list-unstyled']// *[text()='Singin' in the Rain']").text == "Singin' in the Rain"
+        print(self.driver.find_element_by_xpath('//*[@class="centersmall"]//*[text()="Singin\' in the Rain (1952)"]').text)
+        assert self.driver.find_element_by_class_name('//*[@class="centersmall"]//*[text()="Singin\' in the Rain (1952)"]').text == "Singin' in the Rain (1952)"
 
 
 
