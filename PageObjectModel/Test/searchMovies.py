@@ -7,11 +7,12 @@ url = "http://sweetsoundtrack.com/"
 
 class SearchMovies(unittest.TestCase):
 
-    def setUp(self, browser="ff"):
+    def setUp(self, browser="ed"):
         if browser == "chrome" or browser == "ch":
             self.driver = webdriver.Chrome(executable_path=r'../Drivers/ChromeDrive_75/chromedriver.exe')
             self.driver.maximize_window()
             self.driver.get(url)
+            print("Start testu")
         elif browser == "mozilla" or browser == "ff":
             self.driver = webdriver.Firefox(executable_path=r'../Drivers/FirefoxDrive_24/geckodriver.exe')
             self.driver.maximize_window()
@@ -51,9 +52,9 @@ class SearchMovies(unittest.TestCase):
         linkSonginaFromMovies.click()
         clickSonginaFromMovies = self.driver.find_element_by_xpath('//*[@class="list-unstyled"]//*[text()="Singin\' in the Rain"]')
         clickSonginaFromMovies .click()
+        print(self.driver.find_element_by_xpath('//*[@class="centersmall"]').text)
+        assert self.driver.find_element_by_xpath('//*[@class="centersmall"]').text == "Singin' in the Rain (1952)"
 
-        print(self.driver.find_element_by_xpath('//*[@class="centersmall"]//*[text()="Singin\' in the Rain (1952)"]').text)
-        assert self.driver.find_element_by_class_name('//*[@class="centersmall"]//*[text()="Singin\' in the Rain (1952)"]').text == "Singin' in the Rain (1952)"
 
 
 
