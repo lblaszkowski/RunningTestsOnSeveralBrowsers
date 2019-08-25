@@ -1,13 +1,16 @@
 import unittest
 from selenium import webdriver
+import os
 import time
+
+from selenium.webdriver import DesiredCapabilities
 
 url = "http://sweetsoundtrack.com/"
 
 
 class SearchMovies(unittest.TestCase):
 
-    def setUp(self, browser="ed"):
+    def setUp(self, browser="ie"):
         if browser == "chrome" or browser == "ch":
             self.driver = webdriver.Chrome(executable_path=r'../Drivers/ChromeDrive_75/chromedriver.exe')
             self.driver.maximize_window()
@@ -21,16 +24,18 @@ class SearchMovies(unittest.TestCase):
             self.driver = webdriver.PhantomJS(executable_path=r'../Drivers/Phantomjs_2_1_1/phantomjs.exe')
             self.driver.maximize_window()
             self.driver.get(url)
-        elif browser == "edge " or browser == "ed":
-            self.driver = webdriver.Edge(executable_path=r'../Drivers/Edge_17134/MicrosoftWebDriver.exe')
+        elif browser == "internet" or browser == "ie":
+            self.driver = webdriver.Ie(executable_path=r'../Drivers/IE_11/IEDriverServer.exe')
             self.driver.maximize_window()
+            IE_Brows = os.path.dirname(__file__)
+            ie_driver_path = IE_Brows + "../Drivers/IE_11/IEDriverServer.exe"
             self.driver.get(url)
-        # elif browser == "internet" or browser == "ie":
-        #     self.driver = webdriver.Ie(executable_path=r'../Drivers/IE_11/IEDriverServer.exe')
-        #     self.driver.maximize_window()
-        #     self.driver.get(url)
         # elif browser == "opera" or browser == "op":
         #     self.driver = webdriver.Opera(executable_path=r'../Drivers/Opera_60/operadriver.exe')
+        #     self.driver.maximize_window()
+        #     self.driver.get(url)
+        # elif browser == "edge " or browser == "ed":
+        #     self.driver = webdriver.Edge(executable_path=r'../Drivers/Edge_17134/MicrosoftWebDriver.exe')
         #     self.driver.maximize_window()
         #     self.driver.get(url)
         else:
