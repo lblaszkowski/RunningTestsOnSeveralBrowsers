@@ -3,7 +3,7 @@ from selenium import webdriver
 import os
 import time
 
-from selenium.webdriver import DesiredCapabilities
+
 
 url = "http://sweetsoundtrack.com/"
 
@@ -34,20 +34,18 @@ class SearchMovies(unittest.TestCase):
         #     self.driver = webdriver.Opera(executable_path=r'../Drivers/Opera_60/operadriver.exe')
         #     self.driver.maximize_window()
         #     self.driver.get(url)
-        # elif browser == "edge " or browser == "ed":
-        #     self.driver = webdriver.Edge(executable_path=r'../Drivers/Edge_17134/MicrosoftWebDriver.exe')
-        #     self.driver.maximize_window()
-        #     self.driver.get(url)
+        elif browser == "edge " or browser == "ed":
+            self.driver = webdriver.Edge(executable_path=r'../Drivers/Edge_17134/MicrosoftWebDriver.exe')
+            self.driver.maximize_window()
+            self.driver.get(url)
         else:
             print("Brak przeglądarki")
             raise Exception("Brak przeglądarki")
         return self.driver
 
-
     def tearDown(self):
         self.driver.close()
         self.driver.quit()
-
 
     def test_songinaMovie(self):
         searchSonginaFromMovies = self.driver.find_element_by_xpath("//*[@class ='form-inline']//input[@class ='form-control']")
